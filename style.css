@@ -1,0 +1,556 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+/* marquee */
+
+.carousel-control-prev:hover, .carousel-control-next:hover {
+    opacity: 1;
+}
+
+/* Adjust icon color and size */
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    filter: invert(1);  /* Makes icons white */
+    width: 40px;
+    height: 40px;
+}
+
+
+.hidden {
+    display: none;
+}
+
+.movie-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.movie {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.seats {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.seat {
+    padding: 10px;
+    background-color: lightgray;
+    border: none;
+    cursor: pointer;
+}
+
+.seat.selected {
+    background-color: green;
+    color: white;
+}
+
+
+/* signin otions *//* Overlay Background */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+}
+
+
+.auth-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    padding: 12px;
+    margin: 10px auto;
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 8px; /* Rounded edges */
+    background: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 10px; /* Space between icon and text */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+.auth-btn img {
+    height: 20px;
+}
+
+.auth-btn:hover {
+    border-color: #ff375f; /* Highlight border on hover */
+    box-shadow: 3px 3px 8px rgba(255, 55, 95, 0.2); /* Shadow effect on hover */
+    background: #f9f9f9;
+}
+
+
+/* Modal Box */
+/* Modal Box - Adjusted Height */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 10px;
+    width: 450px; /* Increased width */
+    max-width: 90%; /* Responsive width */
+    max-height: 450px; /* Reduced height */
+    overflow-y: auto; /* Enables scrolling if content exceeds height */
+    text-align: center;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.mobile-input-wrapper {
+    display: flex;
+    align-items: center;
+    width: 75%;
+    border-bottom: 2px solid #ff375f;
+    padding-bottom: 6px;
+    margin: 12px auto;
+    gap: 10px; /* Adds spacing between flag and input */
+    transition: border-bottom-color 0.3s;
+}
+
+.mobile-input-wrapper:hover,
+.mobile-input-wrapper:focus-within {
+    border-bottom-color: #ff375f;
+}
+
+.country-code {
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* Prevents line breaks */
+}
+
+.mobile-input {
+    border: none;
+    outline: none;
+    flex: 1; /* Allows input to take remaining space */
+    font-size: 16px;
+    padding: 8px 0;
+    background: transparent;
+    color: #333;
+}
+
+.mobile-input::placeholder {
+    color: #888;
+    font-size: 14px;
+}
+
+
+
+
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+header {
+    background-color: #dc3545;
+    color: white;
+    padding: 15px;
+    font-size: 1.8rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.movies-section {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.movies-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.movies-header h2 {
+    font-size: 24px;
+    color: #222;
+}
+
+.see-all {
+    color: red;
+    text-decoration: none;
+    font-size: 14px;
+}
+.movies-container {
+    display: flex;
+    justify-content: center; /* Center the movie cards */
+    align-items: center;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.movies-carousel {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between cards */
+    flex-wrap: wrap; /* Ensures responsiveness */
+    max-width: 1200px; /* Limits the width to prevent excessive stretching */
+}
+.movie {
+    width: 210px; /* Adjust width if needed */
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 0; /* Ensure no padding */
+    margin: 0; /* Remove extra margins */
+}
+
+
+.movie:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+.movie img {
+    width: 100%;
+    height: 300px; /* Ensures uniform image height */
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+    padding: 0; /* Removed padding */
+}
+
+.offer-box img {
+    width: 40px;
+    height: 40px;
+    padding: 0; /* Removed padding */
+}
+
+
+.movie-info {
+    padding: 10px;
+}
+
+.rating,
+.likes {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* Button Styling */
+button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+    outline: none;
+}
+
+button:hover {
+    background-color: #b02a37;
+}
+
+.movie-info h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px; /* Reduce space below the title */
+}
+
+.movie-info p {
+    font-size: 18px;
+    margin-bottom: 3px; /* Reduce space below the genre */
+}
+
+.movie-info .likes {
+    font-size: 18px;
+    margin-top: 3px; /* Reduce space above the likes */
+    display: flex;
+    align-items: center;
+}
+
+
+.rating, .likes {
+    font-size: 18px;
+    margin: 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.star {
+    color: red;
+}
+
+button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #b71c1c;
+}
+
+/* Scroll Buttons */
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50%;
+}
+
+.scroll-btn.left {
+    left: -20px;
+}
+
+.scroll-btn.right {
+    right: -20px;
+}
+
+.scroll-btn:hover {
+    background: black;
+}
+
+
+/* Buttons */
+button {
+    background-color: #dc3545;
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+    outline: none;
+}
+
+button:hover {
+    background-color: #dc3545;
+}
+
+button:focus {
+    outline: 2px solid white;
+}
+
+/* Toggle slider */
+/* Sidebar Styles *//* Sidebar Styles *//* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -340px;  /* Hide it completely (adjust width + padding if needed) */
+    width: 300px;   /* Sidebar width */
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    padding: 15px;
+    z-index: 1000;
+    overflow-y: auto; /* Enable scrolling if content is large */
+}
+
+/* When sidebar is open */
+.sidebar.open {
+    right: 0;  /* Slide in fully */
+}
+
+
+/* Sidebar Header */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+}
+
+/* Close Button */
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Menu Button */
+.menu-btn {
+    font-size: 24px;
+    cursor: pointer;
+    position: fixed;
+    top: 10px;
+    right: 10px;  /* Move menu button to right */
+    background: none;
+    border: none;
+    padding: 5px 10px;
+    z-index: 1100;
+}
+
+/* Menu Styling */
+.menu {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    padding: 10px 0;
+}
+
+.menu li a {
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Disabled Items */
+.menu li.disabled a {
+    color: gray;
+    pointer-events: none;
+}
+
+/* Offer Box */
+.offer-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.offer-box img {
+    width: 40px;
+    height: 40px;
+}
+
+
+.Event-card
+{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+   
+.Eventcard img
+{
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid #ddd;
+    gap: 15px;
+}
+.Eventcard
+{
+border-radius: 15px;
+margin: 0px;
+width: 300px;
+}
+.EVENTS
+{
+font-family:Verdana, Geneva, Tahoma, sans-serif;
+margin-left: 20px;
+margin-top: 20px;
+}
+
+
+/* Hover Effect */
+.event-card:hover {
+    transform: scale(1.05);
+}
+
+
+/*premiere  */
+/* Increase Movie Poster Size */
+.premiere-container .row .col-6 {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 220px; /* Adjust width */
+}
+
+.premiere-container img {
+    width: 100%;
+    height: 300px; /* Fixed height for uniformity */
+    object-fit: cover; /* Prevents distortion */
+    border-radius: 12px;
+}
+
+/* Increase Movie Title Font */
+.pre {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 8px;
+    white-space: nowrap; /* Prevents text from breaking */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds "..." if text is too long */
+}
+
+/* Fix Play Button Icon Size */
+.play-icon {
+    width: 50px !important;
+    height: 50px !important;
+    flex-shrink: 0; /* Prevents shrinking */
+    object-fit: contain;
+}
+
+
+/* footer */
+
+
+
+
+#anywhere
+{
+        height: 100px;
+        border: 1px solid black;
+        border-radius :10px; 
+        background-color: gainsboro;
+        background-image: url(./any.png) ;
+}

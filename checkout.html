@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+  
+
+    <style>
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+header {
+    background-color: #dc3545;
+    color: white;
+    padding: 15px;
+    font-size: 24px;
+}
+
+.checkout-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.booking-details p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+#confirm-btn {
+    background-color: #28a745;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#confirm-btn:hover {
+    background-color: #218838;
+}
+
+.success-message {
+    color: #28a745;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BookMyShow Clone</h1>
+    </header>
+    
+    <main class="checkout-container">
+        <h2>Confirm Booking</h2>
+        <div class="booking-details">
+            <p><strong>Movie:</strong> <span id="movie">N/A</span></p>
+            <p><strong>Showtime:</strong> <span id="time">N/A</span></p>
+            <p><strong>Seats:</strong> <span id="seats">N/A</span></p>
+        </div>
+        <button id="confirm-btn" onclick="confirmBooking()">Confirm Booking</button>
+        <p id="confirmation-message"></p>
+    </main>
+    <script>
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name) || 'N/A';
+        }
+    
+        document.getElementById('movie').textContent = getQueryParam('movie');
+        document.getElementById('time').textContent = getQueryParam('time');
+        document.getElementById('seats').textContent = getQueryParam('seats');
+    
+        function confirmBooking() {
+            const message = document.getElementById('confirmation-message');
+            message.textContent = '🎉 Booking Confirmed! Redirecting...';
+            message.classList.add('success-message');
+    
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+    </script>
+    
+</body>
+</html>

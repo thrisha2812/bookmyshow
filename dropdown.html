@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Dropdown</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .city-selector {
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Styles */
+        .city-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 450px;
+            background: white;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            display: none;
+            padding: 15px;
+            z-index: 100;
+        }
+
+        /* Show dropdown */
+        .city-dropdown.show {
+            display: block;
+        }
+
+        /* Search Box */
+        .search-container {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-container input {
+            border: none;
+            outline: none;
+            width: 100%;
+            padding: 5px;
+        }
+
+        /* Detect My Location */
+        .detect-location {
+            color: #f84464;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        /* Popular Cities Grid */
+        .popular-cities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 15px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .popular-cities img {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        /* View All Cities */
+        .view-all {
+            color: #f84464;
+            text-align: center;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar p-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span class="city-selector" onclick="toggleDropdown()">Bengaluru ▼</span>
+
+            <!-- Dropdown -->
+            <div class="city-dropdown p-3" id="cityDropdown">
+                <!-- Search Box -->
+                <div class="search-container">
+                    <input type="text" id="searchCity" placeholder="Search for your city" onkeyup="filterCities()">
+                </div>
+
+                <!-- Detect My Location -->
+                <div class="detect-location">
+                    <span>📍</span>
+                    <span>Detect my location</span>
+                </div>
+
+                <!-- Popular Cities -->
+                <div class="text-muted text-center">Popular Cities</div>
+                <div class="popular-cities" id="cityList">
+                    <div onclick="selectCity('Mumbai')">
+                        <img src="https://via.placeholder.com/50" alt="Mumbai">
+                        <div>Mumbai</div>
+                    </div>
+                    <div onclick="selectCity('Delhi-NCR')">
+                        <img src="https://via.placeholder.com/50" alt="Delhi-NCR">
+                        <div>Delhi-NCR</div>
+                    </div>
+                    <div onclick="selectCity('Bengaluru')">
+                        <img src="https://via.placeholder.com/50" alt="Bengaluru">
+                        <div>Bengaluru</div>
+                    </div>
+                    <div onclick="selectCity('Hyderabad')">
+                        <img src="https://via.placeholder.com/50" alt="Hyderabad">
+                        <div>Hyderabad</div>
+                    </div>
+                    <div onclick="selectCity('Ahmedabad')">
+                        <img src="https://via.placeholder.com/50" alt="Ahmedabad">
+                        <div>Ahmedabad</div>
+                    </div>
+                    <div onclick="selectCity('Chandigarh')">
+                        <img src="https://via.placeholder.com/50" alt="Chandigarh">
+                        <div>Chandigarh</div>
+                    </div>
+                    <div onclick="selectCity('Chennai')">
+                        <img src="https://via.placeholder.com/50" alt="Chennai">
+                        <div>Chennai</div>
+                    </div>
+                    <div onclick="selectCity('Pune')">
+                        <img src="https://via.placeholder.com/50" alt="Pune">
+                        <div>Pune</div>
+                    </div>
+                    <div onclick="selectCity('Kolkata')">
+                        <img src="https://via.placeholder.com/50" alt="Kolkata">
+                        <div>Kolkata</div>
+                    </div>
+                    <div onclick="selectCity('Kochi')">
+                        <img src="https://via.placeholder.com/50" alt="Kochi">
+                        <div>Kochi</div>
+                    </div>
+                </div>
+
+                <!-- View All Cities -->
+                <div class="view-all" onclick="alert('View All Cities Clicked!')">View All Cities</div>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        function toggleDropdown(event) {
+            event?.stopPropagation();
+            let dropdown = document.getElementById("cityDropdown");
+            dropdown.classList.toggle("show");
+        }
+
+        function selectCity(city) {
+            document.querySelector(".city-selector").innerText = city + " ▼";
+            document.getElementById("cityDropdown").classList.remove("show");
+        }
+
+        function filterCities() {
+            let input = document.getElementById("searchCity").value.toLowerCase().trim();
+            let cities = document.querySelectorAll(".popular-cities div");
+
+            cities.forEach(city => {
+                let cityName = city.innerText.toLowerCase();
+                city.style.display = cityName.includes(input) ? "block" : "none";
+            });
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function(event) {
+            let dropdown = document.getElementById("cityDropdown");
+            if (!event.target.closest(".city-selector")) {
+                dropdown.classList.remove("show");
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+<!-- 
+
+<!-- 
+
+
+<!-- City Selector -->
+<div class="city-selector me-3" onclick="toggleDropdown()">
+    <span id="selectedCity">Bengaluru</span> ▼
+    <!-- Dropdown -->
+    <div class="city-dropdown p-3" id="cityDropdown">
+        <div class="city-search-container">
+            <input type="text" id="searchCity" class="form-control" placeholder="Search for your city" onkeyup="filterCities()">
+        </div>
+        
+        <!-- Detect My Location -->
+        <div class="detect-location">
+            <span class="location-icon">📍</span>
+            <span class="detect-text">Detect my location</span>
+        </div>
+
+        <!-- Popular Cities -->
+        <div class="popular-cities-title">Popular Cities</div>
+        <div class="city-list" id="cityList">
+            <div class="city-item" onclick="selectCity('Mumbai')">
+                <img src="icons/mumbai.svg" alt="Mumbai">
+                <span>Mumbai</span>
+            </div>
+            <div class="city-item" onclick="selectCity('Delhi-NCR')">
+                <img src="icons/delhi.svg" alt="Delhi-NCR">
+                <span>Delhi-NCR</span>
+            </div>
+            <div class="city-item" onclick="selectCity('Bengaluru')">
+                <img src="icons/bangalore.svg" alt="Bengaluru">
+                <span>Bengaluru</span>
+            </div>
+            <div class="city-item" onclick="selectCity('Hyderabad')">
+                <img src="icons/hyderabad.svg" alt="Hyderabad">
+                <span>Hyderabad</span>
+            </div>
+            <div class="city-item" onclick="selectCity('Ahmedabad')">
+                <img src="icons/ahmedabad.svg" alt="Ahmedabad">
+                <span>Ahmedabad</span>
+            </div>
+            <div class="city-item" onclick="selectCity('Chandigarh')">
+                <img src="icons/chandigarh.svg" alt="Chandigarh">
+                <span>Chandigarh</span>
+            </div>
+            <div class="city-item" onclick="selectCity('Chennai')">
+                <img src="icons/chennai.svg" alt="Chennai">
+                <span>Chennai</span>
+            </div>
+            <div class="city-item" onclick="selectCity('Pune')">
+                <img src="icons/pune.svg" alt="Pune">
+                <span>Pune</span>
+            </div>
+            <div class="city-item" onclick="selectCity('Kolkata')">
+                <img src="icons/kolkata.svg" alt="Kolkata">
+                <span>Kolkata</span>
+            </div>
+            <div class="city-item" onclick="selectCity('Kochi')">
+                <img src="icons/kochi.svg" alt="Kochi">
+                <span>Kochi</span>
+            </div>
+        </div>
+
+        <!-- View All Cities -->
+        <div class="view-all-cities">View All Cities</div>
+    </div>
+</div> --> -->

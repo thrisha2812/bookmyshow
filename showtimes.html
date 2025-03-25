@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Showtime | BookMyShow Clone</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f8f8;
+            padding: 20px;
+            margin: 0;
+        }
+
+        header {
+            background-color: #d32f2f;
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+        }
+
+        main {
+            margin-top: 20px;
+            padding: 10px;
+        }
+
+        .showtimes {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .showtime-btn {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            background-color: #d32f2f;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .showtime-btn:hover {
+            background-color: #b71c1c;
+            transform: scale(1.05);
+        }
+
+        .showtime-btn.sold-out {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            font-size: 18px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #555;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #333;
+        }
+
+        @media (max-width: 600px) {
+            .showtimes {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .showtime-btn {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>BookMyShow Clone</header>
+    
+    <main>
+        <section>
+            <h2>Now Showing: <span id="movie-title"></span></h2>
+            <h3>Select Showtime</h3>
+            <p class="loading" id="loading-text">Loading showtimes...</p>
+            <div class="showtimes" id="showtime-container"></div>
+            <a href="index.html" class="back-btn">← Back</a>
+        </section>
+    </main>
+
+    <script>
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const movieTitle = getQueryParam('movie');
+        if (!movieTitle) {
+            alert("No movie selected. Redirecting to homepage...");
+            window.location.href = "index.html";
+        } else {
+            document.getElementById('movie-title').textContent = movieTitle;
+        }
+
+        const showtimeContainer = document.getElementById("showtime-container");
+        const loadingText = document.getElementById("loading-text");
+
+        function fetchShowtimes() {
+            loadingText.style.display = "block";
+            showtimeContainer.innerHTML = "";
+
+            // Simulate fetching real-time data (Replace this with an actual API call)
+            setTimeout(() => {
+                const showtimes = [
+                    { time: "10:00 AM", available: Math.random() > 0.3 }, 
+                    { time: "1:00 PM", available: Math.random() > 0.3 }, 
+                    { time: "4:00 PM", available: Math.random() > 0.3 }, 
+                    { time: "7:00 PM", available: Math.random() > 0.3 }, 
+                    { time: "9:30 PM", available: Math.random() > 0.3 }
+                ];
+
+                showtimes.forEach(({ time, available }) => {
+                    const button = document.createElement("button");
+                    button.classList.add("showtime-btn");
+                    button.textContent = time;
+                    button.setAttribute("aria-label", `Select showtime at ${time}`);
+
+                    if (!available) {
+                        button.classList.add("sold-out");
+                        button.textContent += " (Sold Out)";
+                        button.disabled = true;
+                    } else {
+                        button.onclick = () => selectSeats(time);
+                    }
+
+                    showtimeContainer.appendChild(button);
+                });
+
+                loadingText.style.display = "none";
+            }, 1500);
+        }
+
+        function selectSeats(time) {
+            window.location.href = `seats.html?movie=${encodeURIComponent(movieTitle)}&time=${encodeURIComponent(time)}`;
+        }
+
+        // Fetch showtimes initially and refresh every 10 seconds
+        fetchShowtimes();
+        setInterval(fetchShowtimes, 10000);
+
+    </script>
+
+</body>
+</html>
